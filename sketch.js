@@ -9,35 +9,22 @@ var posy2;
 var posy3;
 var posy=[200,400,600];
 
-var nc; //numero città
-var numeroC = [];
-
 function preload(){
 data =  loadJSON('assets/stati_e_capitali.json');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
-
   // do i numeri o.O
-  while(nc < data.countries.length) {
-    nc = 0;
-    nc++;
-    numeroC.push(nc);
-  }
-
-  var randCit = [];
-  do {
-    randCit[randCit.length] = numeroC.splice(
-                                  Math.floor(Math.random() * numeroC.length)
-                                , 1)[0];
-  } while (numeroC.length < 3);
-  console.log(numeroC)
-
-  esatta = 0;
-  sbagliata2 = 0;
-  sbagliata3 = 0;
-
+  esatta = int(random(0, 197))
+  sbagliata2 = int(random(0, 197))
+  for(var i = 1; i = 0; i++){
+  if (sbagliata2 == esatta) {sbagliata2 = int(random(0, 197))}else{i=0}
+}
+  sbagliata3 = int(random(0, 197))
+  for(var i = 1; i = 0; i++){
+  if (sbagliata3 == esatta || sbagliata3 == sbagliata2) {sbagliata3 = int(random(0, 197))}else{i=0}
+}
 
   //carico Dati
   paese = data.countries[esatta].name;
