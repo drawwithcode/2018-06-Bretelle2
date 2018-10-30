@@ -3,11 +3,13 @@ var paese;
 var capitale1;
 var capitale2;
 var capitale3;
-
+//posizione testi
 var posy1;
 var posy2;
 var posy3;
 var posy=[200,400,600];
+// punteggio
+var punteggio= 0;
 
 function preload(){
 data =  loadJSON('assets/stati_e_capitali.json');
@@ -16,15 +18,18 @@ data =  loadJSON('assets/stati_e_capitali.json');
 function setup() {
   createCanvas(windowWidth, windowHeight)
   // do i numeri o.O
-  esatta = int(random(0, 197))
-  sbagliata2 = int(random(0, 197))
-  for(var i = 1; i = 0; i++){
-  if (sbagliata2 == esatta) {sbagliata2 = int(random(0, 197))}else{i=0}
-}
-  sbagliata3 = int(random(0, 197))
-  for(var i = 1; i = 0; i++){
-  if (sbagliata3 == esatta || sbagliata3 == sbagliata2) {sbagliata3 = int(random(0, 197))}else{i=0}
-}
+  var numeroC = [];
+  for(i=0; i<data.countries.length; i++) {
+    numeroC.push(i);
+  }
+  var randCit = [];
+  do {
+    randCit[randCit.length] = numeroC.splice(Math.floor(Math.random() * numeroC.length), 1)[0];
+  } while (randCit.length < 3);
+  esatta = randCit[0];
+  sbagliata2 = randCit[1];
+  sbagliata3 = randCit[2];
+
 
   //carico Dati
   paese = data.countries[esatta].name;
@@ -32,24 +37,33 @@ function setup() {
   capitale2 = data.countries[sbagliata2].capital;
   capitale3 = data.countries[sbagliata3].capital;
 
+
   //assegno posizioni
   var randY = [];
   do {
-    randY[randY.length] = posy.splice(
-                                  Math.floor(Math.random() * posy.length)
-                                , 1)[0];
+    randY[randY.length] = posy.splice(Math.floor(Math.random() * posy.length), 1)[0];
   } while (randY.length < 3);
-  console.log(randY)
   posy1 = randY[0];
   posy2 = randY[1];
   posy3 = randY[2];
+}
 
+function mousePressed() {
+  var dx = dist(mouseX, 0, 600, 0)
+  var dy = dist(0, mouseY, 0, posy1)
+  if(dx<150&&dy<50) {
+    punteggio++;
+  } else {
+    punteggio--;
+  }
 }
 
 function draw() {
-  textSize(32)
+background(255)
+textSize(32)
 text(paese, 50, 400)
 text(capitale1, 600, posy1)
 text(capitale2, 600, posy2)
 text(capitale3, 600, posy3)
+text('punteggio '+punteggio, width-200, height-20)
 }
