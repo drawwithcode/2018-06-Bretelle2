@@ -16,6 +16,7 @@ data =  loadJSON('assets/stati_e_capitali.json');
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
+  frameRate(12)
   quiz();
 }
 
@@ -44,7 +45,7 @@ quiz = function() {
 
 
   //assegno posizioni
-  var posy=[200,400,600];
+  var posy=[300,400,500];
   var randY = [];
   do {
     randY[randY.length] = posy.splice(Math.floor(Math.random() * posy.length), 1)[0];
@@ -58,12 +59,15 @@ quiz = function() {
 
 function draw() {
 background(255)
+fill(0)
 textSize(32)
 text('Guess the Capital!', 50, 100)
 text(paese, 50, 400)
 text(capitale1, 600, posy1)
 text(capitale2, 600, posy2)
 text(capitale3, 600, posy3)
+if(punteggio>0){fill(random(0,255),random(0,255),random(0,255))}
+if(punteggio<0){fill(random(0,255),0,0)}
 text('punteggio '+punteggio, width-200, height-20)
 }
 
