@@ -9,22 +9,35 @@ var posy2;
 var posy3;
 var posy=[200,400,600];
 
+var nc; //numero città
+var numeroC = [];
+
 function preload(){
 data =  loadJSON('assets/stati_e_capitali.json');
 }
 
 function setup() {
-  createCanvas(800,800)
+  createCanvas(windowWidth, windowHeight)
+
   // do i numeri o.O
-  esatta = int(random(0, 197))
-  sbagliata2 = int(random(0, 197))
-  for(var i = 1; i = 0; i++){
-  if (sbagliata2 == esatta) {sbagliata2 = int(random(0, 197))}else{i=0}
-}
-  sbagliata3 = int(random(0, 197))
-  for(var i = 1; i = 0; i++){
-  if (sbagliata3 == esatta || sbagliata3 == sbagliata2) {sbagliata3 = int(random(0, 197))}else{i=0}
-}
+  while(nc < data.countries.length) {
+    nc = 0;
+    nc++;
+    numeroC.push(nc);
+  }
+
+  var randCit = [];
+  do {
+    randCit[randCit.length] = numeroC.splice(
+                                  Math.floor(Math.random() * numeroC.length)
+                                , 1)[0];
+  } while (numeroC.length < 3);
+  console.log(numeroC)
+
+  esatta = 0;
+  sbagliata2 = 0;
+  sbagliata3 = 0;
+
 
   //carico Dati
   paese = data.countries[esatta].name;
@@ -33,16 +46,17 @@ function setup() {
   capitale3 = data.countries[sbagliata3].capital;
 
   //assegno posizioni
-  posy1 = random(posy)
-  posy2 = random(posy);
-  for(var i = 1; i = 0; i++){
-    if(posy2 != posy1){i=0} else {posy2=random(posy)}
+  var randY = [];
+  do {
+    randY[randY.length] = posy.splice(
+                                  Math.floor(Math.random() * posy.length)
+                                , 1)[0];
+  } while (randY.length < 3);
+  console.log(randY)
+  posy1 = randY[0];
+  posy2 = randY[1];
+  posy3 = randY[2];
 
-  }
-  posy3 = random(posy);
-  for(var i = 1; i = 0; i++){
-    if(posy3 != posy1 && posy3 != posy2){i=0} else {posy3=random(posy)}
-  }
 }
 
 function draw() {
